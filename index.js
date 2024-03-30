@@ -9,6 +9,7 @@ morgan.token('postData', function(req, res) {
 
 app.use(morgan('tiny'));
 app.use(morgan(':method :url :status :response-time ms - :res[content-length] :postData'));
+app.use(express.static('dist'))
 app.use(express.json());
 
 let persons = [
