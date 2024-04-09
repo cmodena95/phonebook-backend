@@ -47,15 +47,23 @@ app.get('/api/persons/:id', (request, response) => {
 })
 
 app.delete('/api/persons/:id', (request, response) => {
-  const id = request.params.id;
+  const id = request.params.id
 
   Person.findByIdAndDelete(id).then(deletedPerson => {
     if (!deletedPerson) {
-      response.status(404).json({ error: 'Person not found' });
-    } else {
-      response.status(204).end();
+      return response.status(404).json({ error: 'Person not found' })
     }
+    response.status(204).end()
   })
+
+  // Person.find({id: request.params.id}).then(person => {
+  //   if (!person) {
+  //     response.status(404).json({ error: 'Person not found' });
+  //   } else {
+  //     Person.deleteOne(person)
+  //     response.status(204).end();
+  //   }
+  // })
 })
 
 app.post('/api/persons', (request, response) => {
